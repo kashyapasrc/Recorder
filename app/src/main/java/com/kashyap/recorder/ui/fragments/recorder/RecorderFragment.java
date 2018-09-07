@@ -1,17 +1,19 @@
-package com.kashyap.recorder.ui.recorder;
+package com.kashyap.recorder.ui.fragments.recorder;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
-import com.kashyap.recorder.BasePresenter;
-import com.kashyap.recorder.MainActivityCallBacks;
+import com.kashyap.recorder.ui.BasePresenter;
+import com.kashyap.recorder.ui.MainActivityCallBacks;
 import com.kashyap.recorder.R;
-import com.kashyap.recorder.BaseFragment;
+import com.kashyap.recorder.ui.BaseFragment;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RecorderFragment extends BaseFragment implements RecorderContract.View {
 
@@ -22,9 +24,7 @@ public class RecorderFragment extends BaseFragment implements RecorderContract.V
 
 
     public static RecorderFragment getInstance(Bundle bundle) {
-        //Create a new Instance.
         RecorderFragment fragment = new RecorderFragment();
-        //To add bundle.
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -33,14 +33,12 @@ public class RecorderFragment extends BaseFragment implements RecorderContract.V
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         onAttached(context);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
         onAttached(activity);
     }
 
@@ -58,10 +56,10 @@ public class RecorderFragment extends BaseFragment implements RecorderContract.V
         return R.layout.fragment_record;
     }
 
+
     @Override
-    public void initView() {
-
-
+    public void initButterKnife() {
+        mUnBinder = ButterKnife.bind(this, getRootView());
     }
 
     @Override
@@ -85,7 +83,6 @@ public class RecorderFragment extends BaseFragment implements RecorderContract.V
         if (mPresenter != null) {
             mPresenter.initCounter();
             mPresenter.startCounter();
-            mPresenter.startRecording();
         }
     }
 

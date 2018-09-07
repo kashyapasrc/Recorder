@@ -1,4 +1,4 @@
-package com.kashyap.recorder;
+package com.kashyap.recorder.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,11 +13,14 @@ import butterknife.Unbinder;
 
 abstract public class BaseFragment extends Fragment {
 
-    private Unbinder mUnBinder;
+    protected Unbinder mUnBinder;
 
     public abstract int layoutId();
 
-    public abstract void initView();
+    public abstract void initButterKnife();
+
+
+    private View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,20 +30,26 @@ abstract public class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(layoutId(), container, false);
-        mUnBinder = ButterKnife.bind(view);
-        return view;
+        mRootView = inflater.inflate(layoutId(), container, false);
+        initButterKnife();
+        return mRootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView();
     }
+
+    public View getRootView() {
+        return mRootView;
+    }
+
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mUnBinder.unbind();
+        if (mUnBinder != null)
+            mUnBinder.unbind();
     }
 }

@@ -1,4 +1,4 @@
-package com.kashyap.recorder.ui.recorder;
+package com.kashyap.recorder.ui.fragments.recorder;
 
 
 import android.os.Handler;
@@ -17,7 +17,6 @@ public class RecorderPresenter implements RecorderContract.Presenter {
     @Override
     public void initCounter() {
         mCounter = 0;
-
     }
 
     @Override
@@ -27,43 +26,12 @@ public class RecorderPresenter implements RecorderContract.Presenter {
             @Override
             public void run() {
                 mView.updateUI(++mCounter);
-                mCounterHandler.postDelayed(this, 500);
+                mCounterHandler.postDelayed(this, 1000);
             }
         }, 1000);
     }
 
-    @Override
-    public void stopCounter() {
 
-    }
 
-    @Override
-    public void initRecording() {
 
-    }
-
-    @Override
-    public void saveRecording() {
-
-    }
-
-    @Override
-    public void startRecording() {
-
-    }
-
-    @Override
-    public void stopRecording() {
-
-    }
-
-    @Override
-    public void pauseRecording() {
-
-    }
-
-    @Override
-    public void resumeRecording() {
-
-    }
 }
